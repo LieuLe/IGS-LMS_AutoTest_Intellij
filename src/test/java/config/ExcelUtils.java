@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExcelUtils {
-    public static List<Object[]> getTestData(String filePath) throws IOException {
+    public static List<Object[]> getTestDataLogin(String filePath) throws IOException {
         List<Object[]> testData = new ArrayList<>();
         FileInputStream file = new FileInputStream(filePath);
         Workbook workbook = WorkbookFactory.create(file);
@@ -36,4 +36,5 @@ public class ExcelUtils {
             return ""; // hoặc một giá trị mặc định khác
         }
     }
+
 }

@@ -6,10 +6,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.LoginPage;
-
 import java.io.IOException;
 import java.util.List;
 import java.time.Duration;
+import io.qameta.allure.*;
 
 public class testlogin_StudentWeb {
     WebDriver driver;
@@ -26,15 +26,19 @@ public class testlogin_StudentWeb {
 
     @DataProvider(name = "loginData")
     public Object[][] getLoginData() throws IOException {
-        List<Object[]> testData = ExcelUtils.getTestData("D:/Automation Test/IGS-LMS_AutoTest_Intellij/src/test/java/resources/login_data.xlsx");
+        List<Object[]> testData = ExcelUtils.getTestDataLogin("D:/Automation Test/IGS-LMS_AutoTest_Intellij/src/test/java/testdata/login_data.xlsx");
         return testData.toArray(new Object[testData.size()][]);
         // username, password, expectedErrorMessage
     }
 
+    @Description("Verify that a user can successfully login")
+    @Story("Login with test data")
+    @Step("Enter username and password, then click login")
+
     @Test (dataProvider = "loginData")
     public void testLogin(String username, String password, String expectedErrorMessage){
-        driver.get("http://igs-web-test.edunext.edu.vn/");
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5000));
+        driver.get("https://lms-test.ivyglobalschool.org/");
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(3000));
         loginPage.enterUsername(username);
         loginPage.enterPassword(password);
         loginPage.clickLogin();
@@ -47,7 +51,7 @@ public class testlogin_StudentWeb {
 
         if (!expectedErrorMessage.isEmpty()) {
             String actualErrorMessage = loginPage.getLoginError();
-            Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
+            Assert.assertEquals(actualErrorMessage,expectedErrorMessage);
 
         } else {
             // Assert that login is successful, e.g., check for a new page or element

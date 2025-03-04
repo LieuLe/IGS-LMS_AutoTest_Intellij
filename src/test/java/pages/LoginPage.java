@@ -16,7 +16,6 @@ public class LoginPage {
     By txtPassword = By.name("password");
     By btnLogin = By.xpath("//*[@id=\"create_form\"]/button");
     By lbErrorMessage =  By.xpath("//*[@id=\"signin\"]/div/div/div[2]");
-    By popupError = By.id("popupError");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
