@@ -1,4 +1,4 @@
-package utils;
+package Utils;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -22,7 +22,7 @@ public class ScreenshotUtils {
         File source = ts.getScreenshotAs(OutputType.FILE);
         try {
             // Lưu ảnh chụp màn hình vào thư mục "./Screenshots/"
-            FileHandler.copy(source, new File("D:\\AutoTest\\IntelliJ\\IGS-LMS_AutoTest_Intellij\\src\\test\\java\\Utils" + screenshotName + ".png"));
+            FileHandler.copy(source, new File("src\\test\\java\\Utils" + screenshotName + ".png"));
             System.out.println("Screenshot taken: " + screenshotName);
         } catch (IOException e) {
             System.out.println("Exception while taking screenshot: " + e.getMessage());
