@@ -1,4 +1,4 @@
-package testcase;
+package testcase.Login;
 
 import Utils.ExcelUtils;
 import Utils.ScreenshotUtils;
@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.LoginPage;
-import Utils.ScreenshotUtils;
 
 import java.io.IOException;
 import java.util.List;
