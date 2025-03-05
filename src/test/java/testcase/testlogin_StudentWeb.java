@@ -7,8 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.LoginPage;
-import utils.ScreenshotUtils;  // Import class ScreenshotUtils
-
+import Utils.ScreenshotUtils;  // Import class ScreenshotUtils
 import java.io.IOException;
 import java.util.List;
 import java.time.Duration;
