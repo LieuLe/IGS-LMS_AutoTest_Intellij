@@ -12,24 +12,24 @@ public class LogoutPage {
     WebDriver driver;
     WebDriverWait wait;
 
-    private By profileAccount = By.id("account");
-    private By profileMenu_Account = By.className("profile-modal");
-    private By logoutText = By.xpath("//*[contains(text(), ' LOG OUT ')]");
-    private By popUp_LogOut = By.className("change-password-modal");
-    private By confirmLogoutText = By.xpath("//*[contains(text(), 'YES, LOG OUT NOW')]");
-    private By welcomeText = By.xpath("//*[contains(text(), 'Welcome to LMS')]");
-    By btnLogout = By.xpath("//button[@type='submit']");
+    By Menu_profileAccount = By.id("account");
+    By Menu_profile = By.className("profile-modal");
+    By btnLogout = By.xpath("//*[contains(text(), ' LOG OUT ')]");
+    By popUp_LogOut = By.className("change-password-modal");
+    By btnconfirmLogout = By.xpath("//*[contains(text(), 'YES, LOG OUT NOW')]");
+    By btn_No =  By.xpath("//*[contains(text(), 'NO, I WANT TO STAY')]");
+
 
     public LogoutPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(3000));
     }
 
-    public void clickLogoutPage() {
+    public void clickProfile() {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(3000));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(profileAccount));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Menu_profileAccount));
         //Click vào profileAccount
-        WebElement profileAccountElement = driver.findElement(profileAccount);
+        WebElement profileAccountElement = driver.findElement(Menu_profileAccount);
         profileAccountElement.click();
         try {
             Thread.sleep(2000);
@@ -38,19 +38,44 @@ public class LogoutPage {
         }
     }
 
-    public void logout() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(profileAccount));
-
-        // Click vào profileAccount
-        WebElement profileAccountElement = driver.findElement(profileAccount);
-        profileAccountElement.click();
-
+    public void clickLogout() {
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(3000));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Menu_profile));
+        //Click vào profileAccount
+        WebElement Logoutbuttion = driver.findElement(btnLogout);
+        Logoutbuttion.click();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
+
+    public void clickYesLogout() {
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(3000));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(popUp_LogOut));
+        //Click vào profileAccount
+        WebElement ConfirmLogout = driver.findElement(btnconfirmLogout);
+        ConfirmLogout.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clickNoLogout() {
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(3000));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(popUp_LogOut));
+        //Click vào profileAccount
+        WebElement NotLogout = driver.findElement(btn_No);
+        NotLogout.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
