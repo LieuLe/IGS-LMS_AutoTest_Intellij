@@ -33,7 +33,7 @@ public class testlogin_StudentWeb {
 
     @DataProvider(name = "loginData")
     public Object[][] getLoginData() throws IOException {
-        List<Object[]> testData = ExcelUtils.getTestDataLogin("D:\\AutoTest\\IntelliJ\\IGS-LMS_AutoTest_Intellij\\src\\test\\java\\testdata\\login_data.xlsx");
+        List<Object[]> testData = ExcelUtils.getTestDataLogin("src\\test\\java\\testdata\\login_data.xlsx");
         return testData.toArray(new Object[testData.size()][]);
         // username, password, expectedErrorMessage
     }
