@@ -1,14 +1,11 @@
 package testcase;
-
-import Utils.ExcelUtils;
+import config.ExcelUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.LoginPage;
-import utils.ScreenshotUtils;  // Import class ScreenshotUtils
-
 import java.io.IOException;
 import java.util.List;
 import java.time.Duration;
@@ -18,7 +15,6 @@ public class testlogin_StudentWeb {
     WebDriver driver;
     LoginPage loginPage;
     private WebDriverWait wait;
-    private ScreenshotUtils screenshotUtils; // Tạo đối tượng ScreenshotUtils
 
     @BeforeClass
     public void createDriver() {
@@ -26,14 +22,11 @@ public class testlogin_StudentWeb {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         loginPage = new LoginPage(driver);
-
-        // Khởi tạo class ScreenshotUtils
-        screenshotUtils = new ScreenshotUtils(driver);
     }
 
     @DataProvider(name = "loginData")
     public Object[][] getLoginData() throws IOException {
-        List<Object[]> testData = ExcelUtils.getTestDataLogin("D:\\AutoTest\\IntelliJ\\IGS-LMS_AutoTest_Intellij\\src\\test\\java\\testdata\\login_data.xlsx");
+        List<Object[]> testData = ExcelUtils.getTestDataLogin("D:/Automation Test/IGS-LMS_AutoTest_Intellij/src/test/java/testdata/login_data.xlsx");
         return testData.toArray(new Object[testData.size()][]);
         // username, password, expectedErrorMessage
     }
@@ -42,42 +35,34 @@ public class testlogin_StudentWeb {
     @Story("Login with test data")
     @Step("Enter username and password, then click login")
 
-    @Test(dataProvider = "loginData")
-    public void testLogin(String username, String password, String expectedErrorMessage) {
+    @Test (dataProvider = "loginData")
+    public void testLogin(String username, String password, String expectedErrorMessage){
         driver.get("https://lms-test.ivyglobalschool.org/");
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(3000));
         loginPage.enterUsername(username);
         loginPage.enterPassword(password);
         loginPage.clickLogin();
-
-        // Thêm thời gian chờ
+        // Thêm thời gian chờ, bắt ngoại lệ InterruptedException
         try {
             Thread.sleep(3000); // Chờ 3 giây
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // In ra lỗi nếu có
         }
 
-        // Kiểm tra kết quả test case và chụp màn hình
         if (!expectedErrorMessage.isEmpty()) {
             String actualErrorMessage = loginPage.getLoginError();
-            Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
-
-            // Chụp màn hình nếu test kiểm tra lỗi
-            screenshotUtils.captureScreenshot("Failed_Login_" + username);
+            Assert.assertEquals(actualErrorMessage,expectedErrorMessage);
 
         } else {
-            // Kiểm tra login thành công
+            // Assert that login is successful, e.g., check for a new page or element
             Assert.assertTrue(driver.getCurrentUrl().contains("home"));
-
-            // Chụp màn hình nếu login thành công
-            screenshotUtils.captureScreenshot("Successful_Login_" + username);
         }
     }
 
     @AfterClass
     public void closeDriver() {
         if (driver != null) {
-            driver.quit();
+           driver.quit();
         }
     }
 }
