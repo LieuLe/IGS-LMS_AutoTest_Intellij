@@ -1,4 +1,4 @@
-package testcase;
+package testcase.LogOut;
 
 import Utils.ScreenshotUtils;
 import io.qameta.allure.Description;

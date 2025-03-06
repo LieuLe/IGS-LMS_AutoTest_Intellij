@@ -1,13 +1,14 @@
-package testcase;
+package testcase.Login;
 
 import Utils.ExcelUtils;
+import Utils.ScreenshotUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.LoginPage;
-import Utils.ScreenshotUtils;  // Import class ScreenshotUtils
+
 import java.io.IOException;
 import java.util.List;
 import java.time.Duration;

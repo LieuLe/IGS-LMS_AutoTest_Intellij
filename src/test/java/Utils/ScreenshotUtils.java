@@ -22,7 +22,7 @@ public class ScreenshotUtils {
         File source = ts.getScreenshotAs(OutputType.FILE);
         try {
             // Lưu ảnh chụp màn hình vào thư mục "./Screenshots/"
-            FileHandler.copy(source, new File("src\\test\\java\\Utils" + screenshotName + ".png"));
+            FileHandler.copy(source, new File("allure-results/Image_results/" + screenshotName + ".png"));
             System.out.println("Screenshot taken: " + screenshotName);
         } catch (IOException e) {
             System.out.println("Exception while taking screenshot: " + e.getMessage());
