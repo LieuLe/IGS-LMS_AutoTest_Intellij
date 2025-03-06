@@ -51,7 +51,7 @@ public class testlogout_StudentWeb {
     }
 
     @Description("Verify that a user can successfully logout")
-    @Story("Logout")
+    @Story("Logout with option (yes)")
     @Step("click profile menu , click logout, verify error message")
     @Test(suiteName = "logout")
     public void testLogout() {
@@ -69,8 +69,8 @@ public class testlogout_StudentWeb {
         screenshotUtils.captureScreenshot("testLogout_valid");
     }
 
-    @Description("Verify that a user can successfully logout")
-    @Story("Logout")
+    @Description("Verify that a user stay in web")
+    @Story("Logout with options (no)")
     @Step("click profile menu , click logout, verify error message")
     @Test(suiteName = "logout")
     public void testNotLogout() {
