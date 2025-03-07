@@ -10,13 +10,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import testcase.Login.loginUtils;
+import Utils.loginUtils;
 
 import java.time.Duration;
 
 public class test {
     WebDriver driver;
-    testcase.Login.loginUtils loginUtils;
+    Utils.loginUtils loginUtils;
     ScreenshotUtils screenshotUtils;
     HomePage homePage;
 
@@ -27,7 +27,6 @@ public class test {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         loginUtils = new loginUtils(driver);
-
 
 
         screenshotUtils = new ScreenshotUtils(driver);
