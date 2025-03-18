@@ -1,4 +1,5 @@
 package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class HomePage {
-
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -18,7 +18,7 @@ public class HomePage {
     // Constructor để khởi tạo driver và WebDriverWait
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Chờ tối đa 10 giây
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     // Phương thức để click vào subject card
@@ -28,8 +28,7 @@ public class HomePage {
 
         // Click vào phần tử
         subjectCard.click();
+
+        System.out.println("Subject card clicked successfully!");
     }
-
-
-
 }
