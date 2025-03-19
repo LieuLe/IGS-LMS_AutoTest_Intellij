@@ -1,47 +1,63 @@
 package testcase.Learning;
 
 import Utils.ScreenshotUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.Item;
-import pages.Lesson;
 import testcase.Login.loginUtils;
 
+import java.time.Duration;
+
 public class test {
-    private WebDriver driver;
-    private loginUtils loginUtils;
-    private ScreenshotUtils screenshotUtils;
-    private HomePage homePage;
+    WebDriver driver;
+    ScreenshotUtils screenshotUtils;
+    HomePage homePage;
+
+    WebElement subjectCard;
 
     @BeforeClass
     public void setup() {
-        // Khởi tạo ChromeDriver
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-
-        // Khởi tạo các class hỗ trợ
         loginUtils = new loginUtils(driver);
+
+
+
         screenshotUtils = new ScreenshotUtils(driver);
-        homePage = new HomePage(driver);
     }
 
     @Test
     public void homeCourseTest() {
-        // Đăng nhập sử dụng loginUtils
+        // Reuse the login method
         loginUtils.login("dqc_student2", "123456789");
 
-        // Nhấn vào "subject card" thông qua HomePage
+        // Add assertions or further steps for the HomeCourse test
+        // Example: Check if the home page/course page is loaded
+        // screenshotUtils.captureScreenshot("HomeCourse_Screenshot");
+
+        // Step 2: Click the subject card using homePage
+        HomePage homePage = new HomePage(driver);
         homePage.clickOnSubjectCard();
 
-        // Nhấn vào phần "Lesson"
-        Lesson lesson = new Lesson(driver);
-        lesson.clickOnLesson();
+        By imgLocator = By.xpath("//img[@src='/themes/web/assets/images/icon/btn-play.png']");
 
-        // Nhấn vào phần "Item"
-        Item item = new Item(driver);
-        item.clickOnItem();
+        WebElement imgElement = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(imgLocator));
+        imgElement.click();
+
+
+
+
+
+
+
+
     }
+
 }
