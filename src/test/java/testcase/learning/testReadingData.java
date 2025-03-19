@@ -1,16 +1,17 @@
-package testcase.Learning;
+package testcase.learning;
 
-import Utils.ScreenshotUtils;
+import utils.ScreenshotUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import testcase.Login.loginUtils;
 
+
 public class testReadingData {
 
     WebDriver driver;
-    testcase.Login.loginUtils loginUtils;
+    loginUtils loginUtils;
 
     ScreenshotUtils screenshotUtils;
 

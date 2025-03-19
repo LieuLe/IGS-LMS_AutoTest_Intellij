@@ -13,7 +13,7 @@ public class HomePage {
     private WebDriverWait wait;
 
     // Locator cho subject card
-    private By subjectCardLocator = By.className("subject-card");
+    private final By subjectCardLocator = By.className("subject-card");
 
     // Constructor để khởi tạo driver và WebDriverWait
     public HomePage(WebDriver driver) {
@@ -24,6 +24,7 @@ public class HomePage {
     // Phương thức để click vào subject card
     public void clickOnSubjectCard() {
         // Chờ đến khi phần tử "subject-card" xuất hiện
+
         WebElement subjectCard = wait.until(ExpectedConditions.visibilityOfElementLocated(subjectCardLocator));
 
         // Click vào phần tử

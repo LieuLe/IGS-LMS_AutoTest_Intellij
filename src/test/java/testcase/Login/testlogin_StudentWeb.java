@@ -1,7 +1,7 @@
 package testcase.Login;
 
-import Utils.ExcelUtils;
-import Utils.ScreenshotUtils;
+import utils.ExcelUtils;
+import utils.ScreenshotUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;

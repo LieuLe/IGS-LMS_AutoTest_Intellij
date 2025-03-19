@@ -1,4 +1,4 @@
-package Utils;
+package testcase.Login;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LoginPage;
@@ -7,7 +7,7 @@ import java.time.Duration;
 
 public class loginUtils {
 
-    private WebDriver driver;
+    private static WebDriver driver;
     private WebDriverWait wait;
     private LoginPage loginPage;
 

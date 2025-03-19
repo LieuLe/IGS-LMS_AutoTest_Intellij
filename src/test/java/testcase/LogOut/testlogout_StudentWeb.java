@@ -1,6 +1,6 @@
 package testcase.LogOut;
 
-import Utils.ScreenshotUtils;
+import utils.ScreenshotUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
