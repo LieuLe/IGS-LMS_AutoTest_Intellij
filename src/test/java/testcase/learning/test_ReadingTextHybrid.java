@@ -45,11 +45,15 @@ public class test_ReadingTextHybrid {
         HomePage homePage = new HomePage(driver);
         WebElement subjectCard = wait.until(ExpectedConditions.elementToBeClickable(By.className("subject-card")));
         subjectCard.click();
+        wait.until(ExpectedConditions.urlContains("subject"));
+        Thread.sleep(2000);
 
         // Step 3: Click on the lesson
         Lesson lesson = new Lesson(driver);
         WebElement lessonElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/themes/web/assets/images/icon/btn-play.png']")));
         lessonElement.click();
+        wait.until(ExpectedConditions.urlContains("lesson-package"));
+        Thread.sleep(2000);
 
         // Step 4: Click on the item
         Item item = new Item(driver);
