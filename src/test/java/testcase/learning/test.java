@@ -82,6 +82,6 @@ public class test {
 
     @AfterClass
     public void tearDown() {
-        driverSetup.tearDown(); // Quit the driver
+        //driverSetup.tearDown(); // Quit the driver
     }
 }
