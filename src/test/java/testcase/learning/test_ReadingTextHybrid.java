@@ -40,22 +40,24 @@ public class test_ReadingTextHybrid {
         // Reuse the login method
         loginUtils.login("dqc_student2", "123456789");
 
-        // Step 2: Click on the subject card with explicit wait
+        // Step 2: Click on the subject card
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         HomePage homePage = new HomePage(driver);
         WebElement subjectCard = wait.until(ExpectedConditions.elementToBeClickable(By.className("subject-card")));
         subjectCard.click();
+        //Kiểm tra ulr subject
         wait.until(ExpectedConditions.urlContains("subject"));
         Thread.sleep(2000);
 
-        // Step 3: Click on the lesson
+        // Step 3: Click on the lesson package
         Lesson lesson = new Lesson(driver);
         WebElement lessonElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/themes/web/assets/images/icon/btn-play.png']")));
         lessonElement.click();
+        //Kiểm tra ulr lesson package
         wait.until(ExpectedConditions.urlContains("lesson-package"));
         Thread.sleep(2000);
 
-        // Step 4: Click on the item
+        // Step 4: Click on the lesson
         Item item = new Item(driver);
         WebElement itemElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/themes/web/assets/images/icon/lesson-package/icon-play.png']")));
         itemElement.click();
