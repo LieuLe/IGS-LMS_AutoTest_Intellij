@@ -66,10 +66,11 @@ public class test_ReadingTextHybrid {
         js.executeScript("window.scrollTo(0, document.body.scrollHeight / 2);");
         Thread.sleep(2000);
         driver.switchTo().frame(0);
-        //choose first answer
+        //List of answers in question1
         List<WebElement> question1 = driver.findElements(By.cssSelector("label[class='text-answer py-1']"));
         System.out.println("Số lượng phần tử trong danh sách: " + question1.size());
 
+        //Check answer type
         if (driver.findElements(By.cssSelector("input[type='radio']")).isEmpty()) {
             // Câu hỏi dạng radio (chỉ chọn 1 đáp án)
             List<WebElement> radioOption = driver.findElements(By.cssSelector("input[type='radio']"));
@@ -87,7 +88,6 @@ public class test_ReadingTextHybrid {
             WebElement textInput = driver.findElement(By.cssSelector("input[type='text']"));
             textInput.sendKeys("Nhập được rồi nè"); // Nhập câu trả lời
         }
-        //question1.get(0).click();
         Thread.sleep(2000);
         //driver.findElement(By.xpath("//div[@id='sandbox']/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/label/span")).click();
         //Click next buttion
