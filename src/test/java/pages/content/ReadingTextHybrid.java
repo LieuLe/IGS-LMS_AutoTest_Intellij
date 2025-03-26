@@ -1,4 +1,4 @@
-package testcase.content;
+package pages.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
