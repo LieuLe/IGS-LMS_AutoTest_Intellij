@@ -16,6 +16,9 @@ public class LoginPage {
     By txtPassword = By.name("password");
     By btnLogin = By.xpath("//*[@id=\"create_form\"]/button");
     By lbErrorMessage =  By.xpath("//*[@id=\"signin\"]/div/div/div[2]");
+    //By popUp_warning = By.className("warning-modal");
+    By popUp_warning = By.cssSelector("div[class='warning-modal']");
+    By btn_Igotit =  By.xpath("//*[contains(text(), 'I got it')]");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -44,6 +47,18 @@ public class LoginPage {
             return error.getText().trim();
         } catch (Exception e) {
             return "";
+        }
+    }
+
+    public void clickIgotit (){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(popUp_warning));
+        if (driver.findElement(popUp_warning).isDisplayed())
+        {
+            driver.findElement(btn_Igotit).click();
+        }
+        else
+        {
+            System.out.println("Check I got it popup fail");
         }
     }
 }

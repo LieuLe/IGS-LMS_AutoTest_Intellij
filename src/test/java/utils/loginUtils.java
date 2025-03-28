@@ -23,5 +23,6 @@ public class loginUtils {
         loginPage.enterUsername(username);
         loginPage.enterPassword(password);
         loginPage.clickLogin();
+        loginPage.clickIgotit();
     }
 }

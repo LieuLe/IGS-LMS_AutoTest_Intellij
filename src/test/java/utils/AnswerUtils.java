@@ -18,6 +18,8 @@ public class AnswerUtils {
     By input_answer = By.cssSelector("input[type='text']");
     By numberanswer = By.cssSelector("label[class='text-answer py-1']");
 
+    By btn_next = By.cssSelector("button[class='btn-next']");
+
     public AnswerUtils(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(3000));
@@ -50,9 +52,32 @@ public class AnswerUtils {
 
     public void clickCheckboxAnswer() {
         List<WebElement> checkboxOptions = driver.findElements(cb_answer);
-        for (WebElement checkbox : checkboxOptions) {
-            checkbox.click(); // Chọn tất cả checkbox (tuỳ chỉnh theo logic)
+        if (!checkboxOptions.isEmpty()) { // Kiểm tra danh sách checkbox có phần tử không
+            for (WebElement checkbox : checkboxOptions) {
+                checkbox.click();
+            }
+        } else {
+            System.out.println("Không tìm thấy checkbox nào!");
         }
+    }
+
+    public void inputtext(String text){
+        // Tìm tất cả các ô input text
+        List<WebElement> textInputs = driver.findElements(By.cssSelector("input.input_answer"));
+        // Kiểm tra xem có ô nào không
+        if (!textInputs.isEmpty()) {
+            // Duyệt qua từng ô input và nhập nội dung
+            for (WebElement input : textInputs) {
+                input.sendKeys(text);
+            }
+        } else {
+            System.out.println("Không tìm thấy ô nhập văn bản nào!");
+        }
+    }
+
+    public void clickNext (){
+        if (driver.findElement(btn_next).isDisplayed()){driver.findElement(btn_next).click();}
+        else {System.out.println("Click next is fail");}
     }
 }
 

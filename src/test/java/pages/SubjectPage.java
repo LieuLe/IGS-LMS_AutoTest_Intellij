@@ -66,24 +66,5 @@ public class SubjectPage {
             e.printStackTrace();
         }
     }
-
-    public void clickradioAnswer(int index) {
-        List<WebElement> radioOption = driver.findElements(rd_answer);
-        if (!radioOption.isEmpty()) {
-            radioOption.get(index).click(); // Chọn đáp án đầu tiên
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void clickCheckboxAnswer() {
-        List<WebElement> checkboxOptions = driver.findElements(cb_answer);
-        for (WebElement checkbox : checkboxOptions) {
-            checkbox.click(); // Chọn tất cả checkbox (tuỳ chỉnh theo logic)
-        }
-    }
 }
 

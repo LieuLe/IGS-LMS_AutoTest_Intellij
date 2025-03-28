@@ -41,7 +41,7 @@ public class test_ReadingTextHybrid {
     @Test(priority = 1)
     public void homeCourseTest() throws InterruptedException {
         // Step 1: Login
-        loginUtils.login("https://lms-test.ivyglobalschool.org/","dqc_student2", "123456789");
+        loginUtils.login("https://lms-test.ivyglobalschool.org/","auto.test03", "12345678");
 
         // Step 2: Click on the subject card
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -59,28 +59,41 @@ public class test_ReadingTextHybrid {
         js.executeScript("window.scrollTo(0, document.body.scrollHeight / 2);");
         Thread.sleep(2000);
         driver.switchTo().frame(0);
-        //List of answers in question1
-        List<WebElement> question1 = driver.findElements(By.cssSelector("label[class='text-answer py-1']"));
-        System.out.println("Số lượng phần tử trong danh sách: " + question1.size());
 
-        //Check answer type
-        if (driver.findElements(By.cssSelector("input[type='radio']")).isEmpty()) {
-            //subjectPage.clickradioAnswer(2);
-            answerUtils.clickradioAnswer(2);
-        } else if (driver.findElements(By.cssSelector("input[type='checkbox']")).isEmpty()) {
-            // Câu hỏi dạng checkbox (chọn nhiều đáp án)
-            List<WebElement> checkboxOptions = driver.findElements(By.cssSelector("input[type='checkbox']"));
-            for (WebElement checkbox : checkboxOptions) {
-                checkbox.click(); // Chọn tất cả checkbox (tuỳ chỉnh theo logic)
+        while (true)
+        {
+            if (driver.findElements(By.cssSelector("input[type='radio']")).isEmpty()) {
+                answerUtils.clickradioAnswer(2);
+                Thread.sleep(2000);
+                answerUtils.clickNext();
+            } else if (driver.findElements(By.cssSelector("input[type='checkbox']")).isEmpty()) {
+                answerUtils.clickCheckboxAnswer();
+                Thread.sleep(2000);
+                answerUtils.clickNext();
+            } else if (driver.findElements(By.cssSelector("input[type='text']")).isEmpty()) {
+                answerUtils.inputtext("abcd");
+                Thread.sleep(2000);
+                answerUtils.clickNext();
             }
-        } else if (driver.findElements(By.cssSelector("input[type='text']")).isEmpty()) {
-            // Câu hỏi dạng input text
-            WebElement textInput = driver.findElement(By.cssSelector("input[type='text']"));
-            textInput.sendKeys("Nhập được rồi nè"); // Nhập câu trả lời
-        }
-        Thread.sleep(2000);
-        driver.findElement(By.cssSelector("button[class='btn-next']")).click();
+            Thread.sleep(1000);
+            // Tìm nút Next
+            List<WebElement> nextButton = driver.findElements(By.cssSelector("button.btn-next"));
 
+            // Nếu không tìm thấy nút Next hoặc nút Next bị vô hiệu hóa, thoát vòng lặp
+            if (nextButton.isEmpty() || nextButton.get(0).getAttribute("disabled") != null) {
+                System.out.println("Không còn nút Next, kết thúc bài kiểm tra!");
+                break;
+            }
+
+            // Nếu còn nút Next, bấm để qua trang tiếp theo
+            nextButton.get(0).click();
+            Thread.sleep(2000); // Đợi trang load
+        }
+
+
+        //List of answers in question1
+        //List<WebElement> question1 = driver.findElements(By.cssSelector("label[class='text-answer py-1']"));
+        //System.out.println("Số lượng phần tử trong danh sách: " + question1.size());
     }
 
     @AfterClass
