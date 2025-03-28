@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.Item;
 import pages.Lesson;
-import testcase.Login.loginUtils;
+import utils.loginUtils;
 import utils.DriverSetup;
 
 import java.time.Duration;
@@ -37,7 +37,7 @@ public class test {
     @Test
     public void homeCourseTest() {
         // Reuse the login method
-        loginUtils.login("dqc_student2", "123456789");
+        loginUtils.login("https://lms-test.ivyglobalschool.org/","dqc_student2", "123456789");
 /*
         // Step 2: Click the subject card using homePage
         HomePage homePage = new HomePage(driver);

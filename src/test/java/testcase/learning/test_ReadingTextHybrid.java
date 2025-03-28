@@ -3,16 +3,14 @@ package testcase.learning;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.Item;
-import pages.Lesson;
 import pages.SubjectPage;
-import testcase.Login.loginUtils;
+import utils.AnswerUtils;
+import utils.loginUtils;
 import utils.DriverSetup;
 import utils.ScreenshotUtils;
 import org.openqa.selenium.JavascriptExecutor;
@@ -27,6 +25,7 @@ public class test_ReadingTextHybrid {
     DriverSetup driverSetup;// Declare setup utility class
     JavascriptExecutor js;
     SubjectPage subjectPage;
+    AnswerUtils answerUtils;
 
     @BeforeClass
     public void setup() {
@@ -36,12 +35,13 @@ public class test_ReadingTextHybrid {
         loginUtils = new loginUtils(driver); // Use initialized driver
         screenshotUtils = new ScreenshotUtils(driver);
         subjectPage = new SubjectPage(driver);
+        answerUtils = new AnswerUtils(driver);
     }
 
     @Test(priority = 1)
     public void homeCourseTest() throws InterruptedException {
         // Step 1: Login
-        loginUtils.login("dqc_student2", "123456789");
+        loginUtils.login("https://lms-test.ivyglobalschool.org/","dqc_student2", "123456789");
 
         // Step 2: Click on the subject card
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -65,7 +65,8 @@ public class test_ReadingTextHybrid {
 
         //Check answer type
         if (driver.findElements(By.cssSelector("input[type='radio']")).isEmpty()) {
-            subjectPage.clickradioAnswer(2);
+            //subjectPage.clickradioAnswer(2);
+            answerUtils.clickradioAnswer(2);
         } else if (driver.findElements(By.cssSelector("input[type='checkbox']")).isEmpty()) {
             // Câu hỏi dạng checkbox (chọn nhiều đáp án)
             List<WebElement> checkboxOptions = driver.findElements(By.cssSelector("input[type='checkbox']"));
@@ -84,6 +85,6 @@ public class test_ReadingTextHybrid {
 
     @AfterClass
     public void tearDown() {
-        driverSetup.tearDown(); // Quit the driver
+        //driverSetup.tearDown(); // Quit the driver
     }
 }
