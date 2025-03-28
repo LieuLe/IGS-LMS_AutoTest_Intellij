@@ -84,6 +84,6 @@ public class test_ReadingTextHybrid {
 
     @AfterClass
     public void tearDown() {
-        //driverSetup.tearDown(); // Quit the driver
+        driverSetup.tearDown(); // Quit the driver
     }
 }
