@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import testcase.Login.loginUtils;
+import utils.loginUtils;
 
 
 public class testReadingData {
@@ -32,7 +32,7 @@ public class testReadingData {
     @Test
     public void ReadingData() {
         // Reuse the login method
-        loginUtils.login("dqc_student2", "123456789");
+        loginUtils.login("https://lms-test.ivyglobalschool.org/","dqc_student2", "123456789");
 
     }
 

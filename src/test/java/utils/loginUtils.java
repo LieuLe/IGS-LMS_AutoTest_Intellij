@@ -1,4 +1,4 @@
-package testcase.Login;
+package utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LoginPage;
@@ -18,10 +18,11 @@ public class loginUtils {
     }
 
     // Login method
-    public void login(String username, String password) {
-        driver.get("https://lms-test.ivyglobalschool.org/");
+    public void login(String url,String username, String password) {
+        driver.get(url);
         loginPage.enterUsername(username);
         loginPage.enterPassword(password);
         loginPage.clickLogin();
+        loginPage.clickIgotit();
     }
 }
