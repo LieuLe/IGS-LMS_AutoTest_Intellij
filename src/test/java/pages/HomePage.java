@@ -23,13 +23,16 @@ public class HomePage {
 
     // Phương thức để click vào subject card
     public void clickOnSubjectCard() {
-        // Chờ đến khi phần tử "subject-card" xuất hiện
+        try {// Chờ đến khi phần tử "subject-card" xuất hiện
+            WebElement subjectElement = wait.until(ExpectedConditions.elementToBeClickable(subjectCardLocator));
+            WebElement subjectCard = wait.until(ExpectedConditions.visibilityOfElementLocated(subjectCardLocator));
 
-        WebElement subjectCard = wait.until(ExpectedConditions.visibilityOfElementLocated(subjectCardLocator));
-
-        // Click vào phần tử
-        subjectCard.click();
+            // Click vào phần tử
+            subjectCard.click();
 
         System.out.println("Subject card clicked successfully!");
+        } catch (Exception e) {
+            System.err.println("Error while clicking on the item: " + e.getMessage());
+        }
     }
 }

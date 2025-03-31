@@ -9,8 +9,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.Item;
-import pages.Lesson;
+import pages.LessonPackPage;
+import pages.ModulePage;
 import testcase.Login.loginUtils;
 import utils.DriverSetup;
 import utils.ScreenshotUtils;
@@ -18,7 +18,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import java.time.Duration;
 import java.util.List;
 
-public class test_ReadingTextHybrid {
+public class PracticeReadingTextHybrid {
     WebDriver driver;
     ScreenshotUtils screenshotUtils;
     HomePage homePage;
@@ -50,7 +50,7 @@ public class test_ReadingTextHybrid {
         Thread.sleep(2000);
 
         // Step 3: Click on the lesson package
-        Lesson lesson = new Lesson(driver);
+        ModulePage lesson = new ModulePage(driver);
         WebElement lessonElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/themes/web/assets/images/icon/btn-play.png']")));
         lessonElement.click();
         //Kiểm tra ulr lesson package
@@ -58,7 +58,7 @@ public class test_ReadingTextHybrid {
         Thread.sleep(2000);
 
         // Step 4: Click on the lesson
-        Item item = new Item(driver);
+        LessonPackPage lessonPackPage = new LessonPackPage(driver);
         WebElement itemElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/themes/web/assets/images/icon/lesson-package/icon-play.png']")));
         itemElement.click();
 
