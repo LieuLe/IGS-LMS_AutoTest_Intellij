@@ -18,21 +18,18 @@ public class HomePage {
     // Constructor để khởi tạo driver và WebDriverWait
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
     }
 
     // Phương thức để click vào subject card
     public void clickOnSubjectCard() {
-        try {// Chờ đến khi phần tử "subject-card" xuất hiện
-
+        try {
             WebElement subjectCard = wait.until(ExpectedConditions.visibilityOfElementLocated(subjectCardLocator));
 
-            // Click vào phần tử
             subjectCard.click();
-
-        System.out.println("Subject card clicked successfully!");
+            System.out.println("Subject card clicked successfully!");
         } catch (Exception e) {
-            System.err.println("Error while clicking on the item: " + e.getMessage());
+            System.err.println("Error while clicking on the subject card: " + e.getMessage());
         }
     }
 }

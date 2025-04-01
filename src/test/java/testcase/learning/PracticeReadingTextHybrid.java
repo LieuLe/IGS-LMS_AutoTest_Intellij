@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LessonPackPage;
 import pages.ModulePage;
-import utils.AnswerUtils;
+import pages.content.ReadingTextHybrid;
 import utils.loginUtils;
 import utils.DriverSetup;
 import utils.ScreenshotUtils;
@@ -28,7 +28,9 @@ public class PracticeReadingTextHybrid {
     DriverSetup driverSetup;// Declare setup utility class
     JavascriptExecutor js;
     HomePage subjectPage;
-    AnswerUtils answerUtils;
+
+
+    ReadingTextHybrid answerUtils;
 
     @BeforeClass
     public void setup() {
@@ -38,7 +40,8 @@ public class PracticeReadingTextHybrid {
         loginUtils = new loginUtils(driver); // Use initialized driver
         screenshotUtils = new ScreenshotUtils(driver);
         subjectPage = new HomePage(driver);
-        answerUtils = new AnswerUtils(driver);
+        answerUtils = new ReadingTextHybrid(driver);
+
     }
 
     @Test(priority = 1)
@@ -68,10 +71,6 @@ public class PracticeReadingTextHybrid {
         wait.until(ExpectedConditions.urlContains("lesson"));
         Thread.sleep(5000);
 
-        subjectPage.clickOnSubjectCard();
-
-        // Step 4: Click on the lesson
-        subjectPage.clickOnSubjectCard();
 
     }
 
