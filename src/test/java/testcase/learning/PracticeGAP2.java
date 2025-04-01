@@ -13,7 +13,7 @@ import pages.ModulePage;
 import pages.LessonPackPage;
 import pages.ItemPractivePage;
 import pages.content.GAP2Page;
-import testcase.Login.loginUtils;
+import utils.loginUtils;
 import utils.DriverSetup;
 import utils.ScreenshotUtils;
 
@@ -33,22 +33,26 @@ public class PracticeGAP2 {
 
     @BeforeClass
     public void setup() {
-        // Initialize DriverSetup and start WebDriver
-        driverSetup = new DriverSetup();
-        driver = driverSetup.initializeDriver();
+        try {
+            // Initialize DriverSetup and start WebDriver
+            driverSetup = new DriverSetup();
+            driver = driverSetup.initializeDriver();
 
-        // Initialize utilities and page objects
-        screenshotUtils = new ScreenshotUtils(driver);
-        loginUtils = new loginUtils(driver);
-        homePage = new HomePage(driver);
-        modulePage = new ModulePage(driver);
-        lessonPackPage = new LessonPackPage(driver);
-        itemPractivePage = new ItemPractivePage(driver);
+            // Initialize utilities and page objects
+            screenshotUtils = new ScreenshotUtils(driver);
+            loginUtils = new loginUtils(driver);
+            homePage = new HomePage(driver);
+            modulePage = new ModulePage(driver);
+            lessonPackPage = new LessonPackPage(driver);
+            itemPractivePage = new ItemPractivePage(driver);
 
-        // Initialize PageGAP2
-        gap2Page = new GAP2Page(driver);
+            // Initialize PageGAP2
+            gap2Page = new GAP2Page(driver);
 
-        System.out.println("Setup completed successfully!");
+            log.info("Setup completed successfully!");
+        } catch (Exception e) {
+            log.error("Error during setup: " + e.getMessage());
+        }
     }
 
     @SneakyThrows
@@ -56,8 +60,8 @@ public class PracticeGAP2 {
     public void testInputAnswerWithClicks() {
         try {
             // Perform login
-            loginUtils.login("dqc_student2", "123456789");
-            System.out.println("Login successful!");
+            loginUtils.login("https://lms-test.ivyglobalschool.org/", "dqc_student2", "123456789");
+            log.info("Login successful!");
 
             // Interact with the subject card
             homePage.clickOnSubjectCard();
@@ -77,20 +81,14 @@ public class PracticeGAP2 {
             // Generate random 10-character string
             String randomString = generateRandomString(10);
 
-            // Scroll to the inputAnswer element using JavascriptExecutor
-            JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-            WebElement inputAnswer = gap2Page.getInputAnswerElement();
-            jsExecutor.executeScript("arguments[0].scrollIntoView(true);", inputAnswer);
-
-            // Enter random string into the input field
-            inputAnswer.sendKeys(randomString);
-            System.out.println("Entered random text: " + randomString);
+            // Call the InputAnswer method and provide the generated string
+            gap2Page.InputAnswer(randomString); // Pass the required argument
+            log.info("Entered random text: " + randomString);
 
             // Take a screenshot
             screenshotUtils.captureScreenshot("entered_random_text");
-
         } catch (Exception e) {
-            System.err.println("An error occurred during the test: " + e.getMessage());
+            log.error("An error occurred during the test: " + e.getMessage());
         }
     }
 
@@ -110,10 +108,10 @@ public class PracticeGAP2 {
         try {
             if (driver != null) {
                 driver.quit(); // Quit WebDriver
-                System.out.println("Test completed and browser closed.");
+                log.info("Test completed and browser closed.");
             }
         } catch (Exception e) {
-            System.err.println("Error during teardown: " + e.getMessage());
+            log.error("Error during teardown: " + e.getMessage());
         }
     }
 }

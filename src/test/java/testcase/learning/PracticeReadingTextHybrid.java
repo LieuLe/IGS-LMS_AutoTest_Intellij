@@ -3,20 +3,16 @@ package testcase.learning;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.HomePage;
-<<<<<<< HEAD:src/test/java/testcase/learning/PracticeReadingTextHybrid.java
 import pages.LessonPackPage;
 import pages.ModulePage;
-import testcase.Login.loginUtils;
-=======
-import pages.SubjectPage;
 import utils.AnswerUtils;
 import utils.loginUtils;
->>>>>>> 4a6fe2bc0d65cd2ab1ad0fd927d3a5a9aa3bc343:src/test/java/testcase/learning/test_ReadingTextHybrid.java
 import utils.DriverSetup;
 import utils.ScreenshotUtils;
 import org.openqa.selenium.JavascriptExecutor;
@@ -54,7 +50,7 @@ public class PracticeReadingTextHybrid {
         subjectPage.clickSubject();
 
         // Step 3: Click on the lesson package
-<<<<<<< HEAD:src/test/java/testcase/learning/PracticeReadingTextHybrid.java
+
         ModulePage lesson = new ModulePage(driver);
         WebElement lessonElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/themes/web/assets/images/icon/btn-play.png']")));
         lessonElement.click();
@@ -70,12 +66,12 @@ public class PracticeReadingTextHybrid {
         //Kiểm tra ulr lesson
         wait.until(ExpectedConditions.urlContains("lesson"));
         Thread.sleep(5000);
-=======
+
         subjectPage.clickLessonPackage();
 
         // Step 4: Click on the lesson
         subjectPage.clickLesson();
->>>>>>> 4a6fe2bc0d65cd2ab1ad0fd927d3a5a9aa3bc343:src/test/java/testcase/learning/test_ReadingTextHybrid.java
+
     }
 
     @Test(priority = 2)
