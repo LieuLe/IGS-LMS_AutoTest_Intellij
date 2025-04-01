@@ -24,7 +24,7 @@ public class HomePage {
     // Phương thức để click vào subject card
     public void clickOnSubjectCard() {
         try {// Chờ đến khi phần tử "subject-card" xuất hiện
-
+            WebElement subjectElement = wait.until(ExpectedConditions.elementToBeClickable(subjectCardLocator));
             WebElement subjectCard = wait.until(ExpectedConditions.visibilityOfElementLocated(subjectCardLocator));
 
             // Click vào phần tử
