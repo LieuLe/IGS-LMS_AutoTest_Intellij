@@ -61,7 +61,7 @@ public class PracticeGap2 {
             // Nhập liệu vào phần tử input_answer thứ 0 (đầu tiên)
             String answer = "My First Answer";
             gap2Page.InputAnswer(answer, 0);
-
+            Thread.sleep(5000);
             // Nhấn nút Submit
             gap2Page.clickSubmitButtonDisabeled();
 
@@ -70,8 +70,33 @@ public class PracticeGap2 {
             System.err.println("Error during test execution: " + e.getMessage());
         }
     }
+    @Test(priority = 2)
+    public void testSubmitAllAnswer() {
+        try {
+            // Step 1: Đăng nhập
+            loginUtils.login("https://lms-test.ivyglobalschool.org/", "auto.test03", "12345678");
+            System.out.println("Login successful!");
 
-    // Helper method tạo chuỗi ngẫu nhiên
+            // Step 2: Nhấn vào thẻ môn học
+            homePage.clickOnSubjectCard();
+
+            // Step 3: Nhấn vào bài học và item
+            modulePage.clickOnLesson();
+            lessonPackPage.clickOnItem();
+            itemPractivePage.clickNextItem();
+
+            // Step 4: Điền tất cả các đáp án
+            gap2Page.fillAllAnswers("Answer"); // Gọi phương thức điền tất cả các đáp án với "Answer" làm prefix
+
+            // Step 5: Nhấn nút Submit
+            gap2Page.clickSubmitButtonEnabled(); // Kiểm tra nút Submit và thực hiện nhấn nếu điều kiện thỏa mãn
+
+            System.out.println("Test completed successfully: All answers filled and submitted.");
+        } catch (Exception e) {
+            System.err.println("Error during test execution: " + e.getMessage());
+        }
+    }
+
 
 
     @AfterClass
