@@ -19,14 +19,15 @@ import org.openqa.selenium.JavascriptExecutor;
 import java.time.Duration;
 import java.util.List;
 
+
 public class PracticeReadingTextHybrid {
     WebDriver driver;
     ScreenshotUtils screenshotUtils;
-    HomePage homePage;
+
     loginUtils loginUtils;
     DriverSetup driverSetup;// Declare setup utility class
     JavascriptExecutor js;
-    SubjectPage subjectPage;
+    HomePage subjectPage;
     AnswerUtils answerUtils;
 
     @BeforeClass
@@ -36,7 +37,7 @@ public class PracticeReadingTextHybrid {
         js = (JavascriptExecutor) driver;
         loginUtils = new loginUtils(driver); // Use initialized driver
         screenshotUtils = new ScreenshotUtils(driver);
-        subjectPage = new SubjectPage(driver);
+        subjectPage = new HomePage(driver);
         answerUtils = new AnswerUtils(driver);
     }
 
@@ -47,7 +48,7 @@ public class PracticeReadingTextHybrid {
 
         // Step 2: Click on the subject card
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        subjectPage.clickSubject();
+        subjectPage.clickOnSubjectCard();
 
         // Step 3: Click on the lesson package
 
@@ -67,10 +68,10 @@ public class PracticeReadingTextHybrid {
         wait.until(ExpectedConditions.urlContains("lesson"));
         Thread.sleep(5000);
 
-        subjectPage.clickLessonPackage();
+        subjectPage.clickOnSubjectCard();
 
         // Step 4: Click on the lesson
-        subjectPage.clickLesson();
+        subjectPage.clickOnSubjectCard();
 
     }
 
