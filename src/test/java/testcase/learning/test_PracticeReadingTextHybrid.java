@@ -1,6 +1,7 @@
 package testcase.learning;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,16 +12,16 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LessonPackPage;
 import pages.ModulePage;
-import pages.content.ReadingTextHybrid;
-import utils.loginUtils;
+import pages.content.ReadingTextHybridPage;
 import utils.DriverSetup;
 import utils.ScreenshotUtils;
-import org.openqa.selenium.JavascriptExecutor;
+import utils.loginUtils;
+
 import java.time.Duration;
 import java.util.List;
 
 
-public class PracticeReadingTextHybrid {
+public class test_PracticeReadingTextHybrid {
     WebDriver driver;
     ScreenshotUtils screenshotUtils;
 
@@ -28,9 +29,13 @@ public class PracticeReadingTextHybrid {
     DriverSetup driverSetup;// Declare setup utility class
     JavascriptExecutor js;
     HomePage subjectPage;
+    ReadingTextHybridPage answerUtils;
+    ReadingTextHybridPage readingTextHybridPage;
+    ModulePage modulePage;
+    LessonPackPage lessonPackPage;
 
-
-    ReadingTextHybrid answerUtils;
+    By numberanswer = By.cssSelector("label[class='text-answer py-1']");
+    By rd_answer = By.cssSelector("input[type='radio']");
 
     @BeforeClass
     public void setup() {
@@ -40,14 +45,16 @@ public class PracticeReadingTextHybrid {
         loginUtils = new loginUtils(driver); // Use initialized driver
         screenshotUtils = new ScreenshotUtils(driver);
         subjectPage = new HomePage(driver);
-        answerUtils = new ReadingTextHybrid(driver);
-
+        answerUtils = new ReadingTextHybridPage(driver);
+        readingTextHybridPage = new ReadingTextHybridPage(driver);
+        modulePage = new ModulePage(driver);
+        lessonPackPage = new LessonPackPage(driver);
     }
 
     @Test(priority = 1)
-    public void homeCourseTest() throws InterruptedException {
+    public void TestContent_ReadingTextHybrid() throws InterruptedException {
         // Step 1: Login
-        loginUtils.login("https://lms-test.ivyglobalschool.org/","auto.test03", "12345678");
+        loginUtils.login("https://lms-test.ivyglobalschool.org/", "auto.test03", "12345678");
 
         // Step 2: Click on the subject card
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -71,49 +78,42 @@ public class PracticeReadingTextHybrid {
         wait.until(ExpectedConditions.urlContains("lesson"));
         Thread.sleep(5000);
 
+        modulePage.clickOnLesson();
 
-    }
-
-    @Test(priority = 2)
-    public void courseTest() throws InterruptedException {
+        // Scroll xuống giữa trang để load nội dung
         js.executeScript("window.scrollTo(0, document.body.scrollHeight / 2);");
         Thread.sleep(2000);
         driver.switchTo().frame(0);
 
-        while (true)
-        {
-            if (driver.findElements(By.cssSelector("input[type='radio']")).isEmpty()) {
-                answerUtils.clickradioAnswer(2);
-                Thread.sleep(2000);
-                answerUtils.clickNext();
-            } else if (driver.findElements(By.cssSelector("input[type='checkbox']")).isEmpty()) {
-                answerUtils.clickCheckboxAnswer();
-                Thread.sleep(2000);
-                answerUtils.clickNext();
-            } else if (driver.findElements(By.cssSelector("input[type='text']")).isEmpty()) {
-                answerUtils.inputtext("abcd");
-                Thread.sleep(2000);
-                answerUtils.clickNext();
-            }
-            Thread.sleep(1000);
-            // Tìm nút Next
-            List<WebElement> nextButton = driver.findElements(By.cssSelector("button.btn-next"));
+        //Lấy số lượng câu hỏi
+        int totalQuestions = readingTextHybridPage.getTotalQuestions(driver);
+        System.out.println("Tổng số câu hỏi trong package: " + totalQuestions);
 
-            // Nếu không tìm thấy nút Next hoặc nút Next bị vô hiệu hóa, thoát vòng lặp
-            if (nextButton.isEmpty() || nextButton.get(0).getAttribute("disabled") != null) {
-                System.out.println("Không còn nút Next, kết thúc bài kiểm tra!");
+       for (int i = 0; i < totalQuestions; i++) {
+            System.out.println("Đang làm câu hỏi " + (i + 1) + "/" + totalQuestions);
+            // Biến kiểm tra đã chọn được đáp án hay chưa
+            boolean answered = false;
+            if (!driver.findElements(By.cssSelector("input[type='radio']")).isEmpty()) {
+                readingTextHybridPage.clickRadioAnswer(0);
+                answered = true;
+                readingTextHybridPage.clickNext();
+            } else if (!driver.findElements(By.cssSelector("input[type='checkbox']")).isEmpty()) {
+                readingTextHybridPage.clickCheckboxAnswer();
+                answered = true;
+                readingTextHybridPage.clickNext();
+            } else if (!driver.findElements(By.cssSelector("input[type='text']")).isEmpty()) {
+                readingTextHybridPage.inputtext("abcd");
+                Thread.sleep(2000);
+                answered = true;
+                readingTextHybridPage.clickNext();
+            }
+            // Nếu không chọn được đáp án nào, dừng lại
+            if (!answered) {
+                System.out.println("Không tìm thấy đáp án phù hợp, dừng vòng lặp.");
                 break;
             }
-
-            // Nếu còn nút Next, bấm để qua trang tiếp theo
-            nextButton.get(0).click();
-            Thread.sleep(2000); // Đợi trang load
         }
-
-
-        //List of answers in question1
-        //List<WebElement> question1 = driver.findElements(By.cssSelector("label[class='text-answer py-1']"));
-        //System.out.println("Số lượng phần tử trong danh sách: " + question1.size());
+       readingTextHybridPage.clickSubmit();
     }
 
     @AfterClass
