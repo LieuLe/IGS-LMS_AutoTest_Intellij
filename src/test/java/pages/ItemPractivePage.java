@@ -14,6 +14,7 @@ public class ItemPractivePage {
     private WebDriverWait wait;
 
     private final By btnNextRight = By.cssSelector("img[src='/themes/web/assets/images/icon/arrow-right.svg']");
+    private final By btnNextQuestion = By.className("btn-next");
 
 
     public ItemPractivePage(WebDriver driver) {
@@ -29,6 +30,16 @@ public class ItemPractivePage {
             System.out.println("Item clicked next successfully!");
         } catch (Exception e) {
             System.err.println("Error while clicking on the item: " + e.getMessage());
+        }
+    }
+
+    public void clickNextQuestion() {
+        try {
+            WebElement itemElement = wait.until(ExpectedConditions.elementToBeClickable(btnNextQuestion));
+            itemElement.click(); // Click the item element
+            System.out.println("Item clicked next Question successfully!");
+        } catch (Exception e) {
+            System.err.println("Error while clicking on the Question: " + e.getMessage());
         }
     }
 

@@ -8,12 +8,12 @@ import pages.HomePage;
 import pages.ItemPractivePage;
 import pages.LessonPackPage;
 import pages.ModulePage;
-import pages.content.MCQPage;
+import pages.content.MCQvsGAP1Page;
 import utils.DriverSetup;
 import utils.ScreenshotUtils;
 import utils.loginUtils;
 
-public class PracticeMCQ {
+public class PracticeMCQvsGAP1 {
 
     private WebDriver driver; // WebDriver điều khiển trình duyệt
     private ScreenshotUtils screenshotUtils; // Công cụ chụp ảnh màn hình
@@ -23,7 +23,7 @@ public class PracticeMCQ {
     private ModulePage modulePage; // Trang module
     private LessonPackPage lessonPackPage; // Trang bài học
     private ItemPractivePage itemPractivePage; // Trang thực hành
-    private MCQPage mcqPage;
+    private MCQvsGAP1Page MCQvsGAP1Page;
 
     @BeforeClass
     public void setup() {
@@ -38,7 +38,7 @@ public class PracticeMCQ {
         itemPractivePage = new ItemPractivePage(driver);
 
         // Khởi tạo MCQPage
-        mcqPage = new MCQPage(driver);
+        MCQvsGAP1Page = new MCQvsGAP1Page(driver);
 
     }
 
@@ -59,13 +59,18 @@ public class PracticeMCQ {
         itemPractivePage.clickNextItem();
         itemPractivePage.clickNextItem();
         itemPractivePage.clickNextItem();
-
-        mcqPage.clickBoxAnswer(1);
-        Thread.sleep(25000);
-        mcqPage.clickSubmitButtonDisabeled();
+        Thread.sleep(5000);
+        MCQvsGAP1Page.clickBoxAnswer(1);
+        Thread.sleep(5000);
+        MCQvsGAP1Page.clickNextQuestion();
+        String answer = "My First Answer";
+        MCQvsGAP1Page.InputAnswer(answer, 0);
+        Thread.sleep(5000);
+        MCQvsGAP1Page.clickSubmitButtonDisabeled();
         Thread.sleep(5000);
 
     }
+
 
     @AfterClass
     public void tearDown() {
