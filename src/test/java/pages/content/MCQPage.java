@@ -33,7 +33,7 @@ public class MCQPage {
             List<WebElement> iframes = driver.findElements(IframeLocator);
             if (!iframes.isEmpty()) {
                 System.out.println("Switching to iframe...");
-                driver.switchTo().frame(iframes.get(0)); // Chọn iframe đầu tiên (hoặc chỉnh theo yêu cầu)
+                driver.switchTo().frame(iframes.getFirst()); // Chọn iframe đầu tiên (hoặc chỉnh theo yêu cầu)
             }
 
             // Lấy danh sách tất cả các boxAnswer
