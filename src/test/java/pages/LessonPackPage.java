@@ -26,6 +26,9 @@ public class LessonPackPage {
         try {
             WebElement itemElement = wait.until(ExpectedConditions.elementToBeClickable(itemLocator));
             itemElement.click(); // Click the item element
+            //Kiểm tra ulr lesson
+            wait.until(ExpectedConditions.urlContains("lesson"));
+            Thread.sleep(5000);
             System.out.println("Item clicked successfully!");
         } catch (Exception e) {
             System.err.println("Error while clicking on the item: " + e.getMessage());
