@@ -27,6 +27,10 @@ public class ModulePage {
             // Wait until the element is clickable
             WebElement lessonElement = wait.until(ExpectedConditions.elementToBeClickable(lessonLocator));
             lessonElement.click(); // Perform click action
+            //Kiểm tra ulr lesson package
+            wait.until(ExpectedConditions.urlContains("lesson-package"));
+            Thread.sleep(2000);
+            System.out.println("Item clicked successfully!");
             System.out.println("Lesson clicked successfully!");
         } catch (Exception e) {
             // Log error details

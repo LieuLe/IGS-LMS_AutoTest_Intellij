@@ -61,24 +61,10 @@ public class test_PracticeReadingTextHybrid {
         subjectPage.clickOnSubjectCard();
 
         // Step 3: Click on the lesson package
-
-        ModulePage lesson = new ModulePage(driver);
-        WebElement lessonElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/themes/web/assets/images/icon/btn-play.png']")));
-        lessonElement.click();
-        //Kiểm tra ulr lesson package
-        wait.until(ExpectedConditions.urlContains("lesson-package"));
-        Thread.sleep(2000);
+        modulePage.clickOnLesson();
 
         // Step 4: Click on the lesson
-        LessonPackPage lessonPackPage = new LessonPackPage(driver);
-        WebElement itemElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/themes/web/assets/images/icon/lesson-package/icon-play.png']")));
-        itemElement.click();
-
-        //Kiểm tra ulr lesson
-        wait.until(ExpectedConditions.urlContains("lesson"));
-        Thread.sleep(5000);
-
-        modulePage.clickOnLesson();
+        lessonPackPage.clickOnItem();
 
         // Scroll xuống giữa trang để load nội dung
         js.executeScript("window.scrollTo(0, document.body.scrollHeight / 2);");
@@ -89,6 +75,7 @@ public class test_PracticeReadingTextHybrid {
         int totalQuestions = readingTextHybridPage.getTotalQuestions(driver);
         System.out.println("Tổng số câu hỏi trong package: " + totalQuestions);
 
+        //Chọn đáp án
        for (int i = 0; i < totalQuestions; i++) {
             System.out.println("Đang làm câu hỏi " + (i + 1) + "/" + totalQuestions);
             // Biến kiểm tra đã chọn được đáp án hay chưa
@@ -113,7 +100,10 @@ public class test_PracticeReadingTextHybrid {
                 break;
             }
         }
+
+       //Submit bài học
        readingTextHybridPage.clickSubmit();
+       //readingTextHybridPage.clickconfirmsubmit();
     }
 
     @AfterClass

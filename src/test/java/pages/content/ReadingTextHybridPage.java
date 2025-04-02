@@ -21,6 +21,7 @@ public class ReadingTextHybridPage {
     By nb_answer = By.cssSelector("label[class='text-answer py-1']");
     By btn_next = By.cssSelector("button[class='btn-next']");
     By btn_submit = By.cssSelector("button[class='btn-submit']");
+    By btn_yessubmit =  By.xpath("//*[contains(text(), 'YES, SUBMIT NOW')]");
 
     // Constructor
     public ReadingTextHybridPage(WebDriver driver) {
@@ -124,7 +125,14 @@ public class ReadingTextHybridPage {
         if (driver.findElement(btn_submit).isDisplayed()){
             driver.findElement(btn_submit).click();}
         else {
-            System.out.println("Click next is fail");}
+            System.out.println("Click submit is fail");}
+    }
+
+    public void clickconfirmsubmit (){
+        if (driver.findElement(btn_yessubmit).isDisplayed()){
+            driver.findElement(btn_yessubmit).click();}
+        else {
+            System.out.println("Click confirm is fail");}
     }
 
 }
