@@ -58,7 +58,8 @@ public class test_Matching2 {
 
         // Step 2: Click on the subject card
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        homePage.clickOnSubjectCard();
+        //homePage.clickOnSubjectCard();
+        homePage.clickOnSubjectName("DQC - Course - Tổng Hợp 17");
 
         // Step 3: Click on the lesson package
         modulePage.clickOnLesson();

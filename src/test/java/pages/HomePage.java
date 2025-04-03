@@ -32,4 +32,14 @@ public class HomePage {
             System.err.println("Error while clicking on the subject card: " + e.getMessage());
         }
     }
+
+    public void clickOnSubjectName(String subjectname) {
+        try {
+            WebElement courseElement = driver.findElement(By.xpath("//p[@class='studing' and text()='" + subjectname + "']"));
+            courseElement.click();
+            System.out.println("Subject card clicked successfully: "+subjectname);
+        } catch (Exception e) {
+            System.err.println("Error while clicking on the subject card: " + e.getMessage());
+        }
+    }
 }

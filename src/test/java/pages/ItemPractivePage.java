@@ -42,5 +42,4 @@ public class ItemPractivePage {
             System.err.println("Error while clicking on the Question: " + e.getMessage());
         }
     }
-
 }

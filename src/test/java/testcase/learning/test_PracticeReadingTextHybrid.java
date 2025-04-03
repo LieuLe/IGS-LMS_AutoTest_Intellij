@@ -56,7 +56,8 @@ public class test_PracticeReadingTextHybrid {
 
         // Step 2: Click on the subject card
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        homePage.clickOnSubjectCard();
+        //homePage.clickOnSubjectCard();
+        homePage.clickOnSubjectName("DQC - Course - Tổng Hợp Data dài 02");
 
         // Step 3: Click on the lesson package
         modulePage.clickOnLesson();
